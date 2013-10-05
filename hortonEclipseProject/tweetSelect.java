@@ -37,10 +37,17 @@ public class tweetSelect {
 
 		///// WEATHER ///// WEATHER ///// WEATHER ///// WEATHER ///// WEATHER ///// WEATHER 
 			if(line.contains("WeatherGood")){
-				weatherGood.add(line);
+				String[] parts = line.split("\t");
+				for (String part : parts) {
+					weatherGood.add(part);
+				}
+
 			}
 			if(line.contains("WeatherBad")){
-				weatherBad.add(line);
+				String[] parts = line.split("\t");
+				for (String part : parts) {
+					weatherBad.add(part);
+				}
 			}
 		///// WEATHER ///// WEATHER ///// WEATHER ///// WEATHER ///// WEATHER ///// WEATHER
 			
@@ -48,10 +55,16 @@ public class tweetSelect {
 
 		///// Temperature ///// Temperature ///// Temperature ///// Temperature ///// Temperature 
 			if(line.contains("TemperatureGood")){
-				temperatureGood.add(line);
+				String[] parts = line.split("\t");
+				for (String part : parts) {
+					temperatureGood.add(part);
+				}
 			}
 			if(line.contains("TemperatureBad")){
-				temperatureBad.add(line);
+				String[] parts = line.split("\t");
+				for (String part : parts) {
+					temperatureBad.add(part);
+				}
 			}
 		///// Temperature ///// Temperature ///// Temperature ///// Temperature ///// Temperature 
 			
@@ -59,10 +72,16 @@ public class tweetSelect {
 
 		///// Humidity ///// Humidity ///// Humidity ///// Humidity ///// Humidity ///// Humidity 
 			if(line.contains("HumidityGood")){
-				humidityGood.add(line);
+				String[] parts = line.split("\t");
+				for (String part : parts) {
+					humidityGood.add(part);
+				}
 			}
 			if(line.contains("HumidityBad")){
-				humidityBad.add(line);
+				String[] parts = line.split("\t");
+				for (String part : parts) {
+					humidityBad.add(part);
+				}
 			}
 		///// Humidity ///// Humidity ///// Humidity ///// Humidity ///// Humidity ///// Humidity 
 			
@@ -70,10 +89,16 @@ public class tweetSelect {
 
 		///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt 
 			if(line.contains("TiltGood")){
-				tiltGood.add(line);
+				String[] parts = line.split("\t");
+				for (String part : parts) {
+					tiltGood.add(part);
+				}
 			}
 			if(line.contains("TiltBad")){
-				tiltBad.add(line);
+				String[] parts = line.split("\t");
+				for (String part : parts) {
+					tiltBad.add(part);
+				}
 			}
 		///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt 
 			
@@ -81,37 +106,61 @@ public class tweetSelect {
 	
 		///// Light ///// Light ///// Light ///// Light ///// Light ///// Light ///// Light ///// Light 
 			if(line.contains("LightGood")){
-				lightGood.add(line);
+				String[] parts = line.split("\t");
+				for (String part : parts) {
+					lightGood.add(part);
+				}
 			}
 			if(line.contains("LightBad")){
-				lightBad.add(line);
+				String[] parts = line.split("\t");
+				for (String part : parts) {
+					lightBad.add(part);
+				}
 			}
 		///// Light ///// Light ///// Light ///// Light ///// Light ///// Light ///// Light ///// Light 
 		//=======================================================================================\\
 		///// Sound ///// Sound ///// Sound ///// Sound ///// Sound ///// Sound ///// Sound 
 			if(line.contains("SoundGood")){
-				soundGood.add(line);
+				String[] parts = line.split("\t");
+				for (String part : parts) {
+					soundGood.add(part);
+				}
 			}
 			if(line.contains("SoundBad")){
-				soundBad.add(line);
+				String[] parts = line.split("\t");
+				for (String part : parts) {
+					soundBad.add(part);
+				}
 			}
 		///// Sound ///// Sound ///// Sound ///// Sound ///// Sound ///// Sound ///// Sound 
 		//=======================================================================================\\
 		///// Misc ///// Misc ///// Misc ///// Misc ///// Misc ///// Misc ///// Misc ///// Misc 
 			if(line.contains("MiscGood")){
-				miscGood.add(line);
+				String[] parts = line.split("\t");
+				for (String part : parts) {
+					miscGood.add(part);
+				}
 			}
 			if(line.contains("MiscGood")){
-				miscBad.add(line);
+				String[] parts = line.split("\t");
+				for (String part : parts) {
+					miscBad.add(part);
+				}
 			}
 		///// Misc ///// Misc ///// Misc ///// Misc ///// Misc ///// Misc ///// Misc ///// Misc 
 		//=======================================================================================\\
 		///// Moisture ///// Moisture ///// Moisture ///// Moisture ///// Moisture ///// Moisture 
 			if(line.contains("MoistureGood")){
-				moistureGood.add(line);
+				String[] parts = line.split("\t");
+				for (String part : parts) {
+					moistureGood.add(part);
+				}
 			}
 			if(line.contains("MoistureBad")){
-				moistureBad.add(line);
+				String[] parts = line.split("\t");
+				for (String part : parts) {
+					moistureBad.add(part);
+				}
 			}
 		///// Moisture ///// Moisture ///// Moisture ///// Moisture ///// Moisture ///// Moisture 
 			
@@ -131,24 +180,25 @@ public class tweetSelect {
 		
 		//send tweet.
 		
-		System.out.println(weatherGood.toString());
-		System.out.println(weatherGood.toString());
+//		System.out.println(weatherGood.toString());
+//		System.out.println(weatherGood.toString());
 		System.out.println(temperatureGood.toString());
-		System.out.println(temperatureBad.toString());
-		System.out.println(humidityGood.toString());
-		System.out.println(humidityBad.toString());
-		System.out.println(tiltGood.toString());
-		System.out.println(tiltBad.toString());
-		System.out.println(lightGood.toString());
-		System.out.println(lightBad.toString());
-		System.out.println(soundGood.toString());
-		System.out.println(soundBad.toString());
-		System.out.println(miscGood.toString());
-		System.out.println(miscBad.toString());
-		System.out.println(moistureGood.toString());
-		System.out.println(moistureBad.toString());
+//		System.out.println(temperatureBad.toString());
+//		System.out.println(humidityGood.toString());
+//		System.out.println(humidityBad.toString());
+//		System.out.println(tiltGood.toString());
+//		System.out.println(tiltBad.toString());
+//		System.out.println(lightGood.toString());
+//		System.out.println(lightBad.toString());
+//		System.out.println(soundGood.toString());
+//		System.out.println(soundBad.toString());
+//		System.out.println(miscGood.toString());
+//		System.out.println(miscBad.toString());
+//		System.out.println(moistureGood.toString());
+//		System.out.println(moistureBad.toString());
 
-		
+		System.out.println(temperatureGood.get(1).toString());
+
 		//Scanner scan = new Scanner(System.in);
 		
 		
