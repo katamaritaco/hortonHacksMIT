@@ -668,29 +668,26 @@ public class Twitter implements Serializable {
 	 *            If empty, prints version info.
 	 */
 	public static void main(String[] args) {
-		// 1. Get authorised
-		// On Android: use AndroidTwitterLogin
-		// On the desktop...
-		// Make an oauth client (you'll want to change this bit)
-		OAuthSignpostClient oauthClient = new OAuthSignpostClient("h2uWk7fgPgQ3MynvchEg", 
-		"44GkMpRE2XcMsDPbla5GxVDGbCYmvNOqfedkwKHyc7w", "oob");
-		// Open the authorisation page in the user's browser. On a desktop, we can do that like this:
-		oauthClient.authorizeDesktop();
-		// get the pin
-		String v = oauthClient.askUser("Please enter the verification PIN from Twitter");
-		oauthClient.setAuthorizationCode(v);
-		// Store the authorisation token details for future use
-		String[] accessToken = oauthClient.getAccessToken();
-		// Next time we can use new OAuthSignpostClient(OAUTH_KEY, OAUTH_SECRET, 
-//		      accessToken[0], accessToken[1]) to avoid authenticating again.
+		
+		// 1. Get authorized
+		// Make a permanent oauth connection
+		String consumerKey = "h2uWk7fgPgQ3MynvchEg";
+		String consumerSecret = "44GkMpRE2XcMsDPbla5GxVDGbCYmvNOqfedkwKHyc7w";
+		String accessToken = "1938581365-E263zeV3UhB8iCvDX8p5OveQsGgj0GlTPhuqUMf";
+		String accessTokenSecret = "7QAzC9JnVrhqB0v0ds7Oqa2d6fxsw8qxHyKSCD0U";
+		
+		OAuthSignpostClient oauthClient = new OAuthSignpostClient(consumerKey, 
+		consumerSecret, accessToken,
+		accessTokenSecret);
 
 		// 2. Make a Twitter object
 		Twitter twitter = new Twitter("my-name", oauthClient);
 		
-		String status = "Testing tweeting from our program! -The Humans #HackMIT";
-		System.out.println(twitter.getStatus(status));
-		// Set my status
-		twitter.setStatus(status);
+		//Save the status, hard-coded right now
+		String status = "Testing authorization from our program! -The Humans #HackMIT";
+		System.out.println(status); //print the status
+		
+		twitter.setStatus(status); //set the status
 	}
 
 	/**
