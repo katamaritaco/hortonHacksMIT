@@ -16,6 +16,7 @@ import winterwell.jtwitter.OAuthSignpostClient;
 import winterwell.jtwitter.Twitter;
 
 public class Main {
+
 	
 	static String consumerKey = "h2uWk7fgPgQ3MynvchEg";
 	static String consumerSecret = "44GkMpRE2XcMsDPbla5GxVDGbCYmvNOqfedkwKHyc7w";
@@ -85,7 +86,7 @@ static String end_result = new String();
     	String debug = end_result.replace("\n", "").replace("\r", "");
     	System.out.println(debug);
     	if(debug.length() > 10){
-    		twitter.setStatus(debug);
+    		//twitter.setStatus(debug);
     	}
     	end_result = "";
     }
@@ -179,5 +180,6 @@ static String end_result = new String();
 	
 	
 	
+
 	
 }
