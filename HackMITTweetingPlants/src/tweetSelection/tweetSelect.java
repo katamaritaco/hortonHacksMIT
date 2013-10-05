@@ -286,8 +286,14 @@ public class tweetSelect {
 		
 		Random random = new Random();
 		int randomValue = random.nextInt(masterList.size()); 
-		System.out.println("Random:\n" + masterList.get(randomValue));
 		
+		////////////////////////////////////////////////////////////START NOT TESTED USED QUEUE
+		while(!usedList.contains(masterList.get(randomValue))){
+			randomValue = random.nextInt(masterList.size()); 
+			System.out.println("Random:\n" + masterList.get(randomValue));
+			usedList.add(masterList.get(randomValue));
+		}
+		///////////////////////////////////////////////////////////END NOT TESTED USED QUEUE
 	}
 
 }
