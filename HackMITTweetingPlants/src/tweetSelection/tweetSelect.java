@@ -32,6 +32,18 @@ public class tweetSelect {
 		
 		ArrayList<String> usedList = new ArrayList<String>();
 
+		boolean isWeatherGood = false;//set to false for the time being.
+		boolean isTemperatureGood = false;
+		boolean isHumidityGood = false;
+		boolean isTiltGood = false;
+		boolean isLightGood = false;
+		boolean isSoundGood = false;
+		boolean isMiscGood = false;
+		boolean isMoistureGood = false;
+
+		
+		
+		
 		
 		//Read in the file
 		//BufferedReader reader = new BufferedReader(new FileReader("PlantTweets.txt"));
@@ -47,13 +59,14 @@ public class tweetSelect {
 				for (String part : parts) {
 					weatherGood.add(part);
 				}
-
+				weatherGood.remove(0);
 			}
 			if(line.contains("WeatherBad")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					weatherBad.add(part);
 				}
+				weatherBad.remove(0);
 			}
 		///// WEATHER ///// WEATHER ///// WEATHER ///// WEATHER ///// WEATHER ///// WEATHER
 			
@@ -65,12 +78,14 @@ public class tweetSelect {
 				for (String part : parts) {
 					temperatureGood.add(part);
 				}
+				temperatureGood.remove(0);
 			}
 			if(line.contains("TemperatureBad")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					temperatureBad.add(part);
 				}
+				temperatureBad.remove(0);
 			}
 		///// Temperature ///// Temperature ///// Temperature ///// Temperature ///// Temperature 
 			
@@ -82,12 +97,14 @@ public class tweetSelect {
 				for (String part : parts) {
 					humidityGood.add(part);
 				}
+				humidityGood.remove(0);
 			}
 			if(line.contains("HumidityBad")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					humidityBad.add(part);
 				}
+				humidityBad.remove(0);
 			}
 		///// Humidity ///// Humidity ///// Humidity ///// Humidity ///// Humidity ///// Humidity 
 			
@@ -99,12 +116,14 @@ public class tweetSelect {
 				for (String part : parts) {
 					tiltGood.add(part);
 				}
+				tiltGood.remove(0);
 			}
 			if(line.contains("TiltBad")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					tiltBad.add(part);
 				}
+				tiltBad.remove(0);
 			}
 		///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt 
 			
@@ -116,12 +135,14 @@ public class tweetSelect {
 				for (String part : parts) {
 					lightGood.add(part);
 				}
+				lightGood.remove(0);
 			}
 			if(line.contains("LightBad")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					lightBad.add(part);
 				}
+				lightBad.remove(0);
 			}
 		///// Light ///// Light ///// Light ///// Light ///// Light ///// Light ///// Light ///// Light 
 		//=======================================================================================\\
@@ -131,12 +152,14 @@ public class tweetSelect {
 				for (String part : parts) {
 					soundGood.add(part);
 				}
+				soundGood.remove(0);
 			}
 			if(line.contains("SoundBad")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					soundBad.add(part);
 				}
+				soundBad.remove(0);
 			}
 		///// Sound ///// Sound ///// Sound ///// Sound ///// Sound ///// Sound ///// Sound 
 		//=======================================================================================\\
@@ -146,12 +169,14 @@ public class tweetSelect {
 				for (String part : parts) {
 					miscGood.add(part);
 				}
+				miscGood.remove(0);
 			}
 			if(line.contains("MiscGood")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					miscBad.add(part);
 				}
+				miscBad.remove(0);
 			}
 		///// Misc ///// Misc ///// Misc ///// Misc ///// Misc ///// Misc ///// Misc ///// Misc 
 		//=======================================================================================\\
@@ -161,33 +186,85 @@ public class tweetSelect {
 				for (String part : parts) {
 					moistureGood.add(part);
 				}
+				moistureGood.remove(0);
 			}
 			if(line.contains("MoistureBad")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					moistureBad.add(part);
 				}
+				moistureBad.remove(0);
 			}
 		///// Moisture ///// Moisture ///// Moisture ///// Moisture ///// Moisture ///// Moisture 
 			
-
-		    //System.out.println(line);
 		}
 		//For each \n, create a new list with name of first element in the array.
 		
 		//GRAB DATA (WITH KNOWN THRESHOLDS)
 		
 		//Analyze data (check thresholds)
-		
+		if(isWeatherGood){
+			masterList.addAll(weatherGood);
+		}
+		else if (!isWeatherGood){
+			masterList.addAll(weatherBad);
+		}
+		if(isTemperatureGood){
+			masterList.addAll(temperatureGood);
+		}
+		else if (!isTemperatureGood){
+			masterList.addAll(temperatureBad);
+		}
+		if(isHumidityGood){
+			masterList.addAll(humidityGood);
+		}
+		else if (!isHumidityGood){
+			masterList.addAll(humidityBad);
+		}
+		if(isTiltGood){
+			masterList.addAll(tiltGood);
+		}
+		else if (!isTiltGood){
+			masterList.addAll(tiltBad);
+		}
+		if(isLightGood){
+			masterList.addAll(lightGood);
+		}
+		else if (!isLightGood){
+			masterList.addAll(lightBad);
+		}		
+		if(isSoundGood){
+			masterList.addAll(soundGood);
+		}
+		else if (!isSoundGood){
+			masterList.addAll(soundBad);
+		}		
+		if(isMiscGood){
+			masterList.addAll(miscGood);
+		}
+		else if (!isMiscGood){
+			masterList.addAll(miscBad);
+		}		
+		if(isMoistureGood){
+			masterList.addAll(moistureGood);
+		}
+		else if (!isMoistureGood){
+			masterList.addAll(moistureBad);
+		}
 		//Check all boolean thresholds
 		//Add appropriate list to master list
 		
 		//randomly select from master list
+
+		
+		
+		
+		
 		
 		//send tweet.
 		
 //		System.out.println(weatherGood.toString());
-//		System.out.println(weatherGood.toString());
+//		System.out.println(weatherBad.toString());
 		System.out.println(temperatureGood.toString());
 //		System.out.println(temperatureBad.toString());
 //		System.out.println(humidityGood.toString());
@@ -203,12 +280,13 @@ public class tweetSelect {
 //		System.out.println(moistureGood.toString());
 //		System.out.println(moistureBad.toString());
 
-		System.out.println(temperatureGood.get(1).toString());
-
 		//Scanner scan = new Scanner(System.in);
 		
+		System.out.println("Master List:\n" + masterList.toString());
 		
-		
+		Random random = new Random();
+		int randomValue = random.nextInt(masterList.size()); 
+		System.out.println("Random:\n" + masterList.get(randomValue));
 		
 	}
 
