@@ -28,7 +28,8 @@ public class tweetSelect {
 
 		
 		//Read in the file
-		BufferedReader reader = new BufferedReader(new FileReader("tweets.txt"));
+		//BufferedReader reader = new BufferedReader(new FileReader("PlantTweets.txt"));
+		BufferedReader reader = new BufferedReader(new FileReader("PlantTweetsSheet.tsv"));
 		String line = null;
 		while ((line = reader.readLine()) != null) {
 			
