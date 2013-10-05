@@ -18,9 +18,10 @@ public class Main {
 		Twitter twitter = new Twitter("my-name", oauthClient);
 		
 		//Save the status, hard-coded right now
-		String status = "Testing authorization from our program! -The Humans #HackMIT";
+		String status = "Also, on that note, a big plant-shout out to @Twilio for the free Phone credit. Much appreciated! #HackMIT";
 		System.out.println(status); //print the status
 		
 		twitter.setStatus(status); //set the status
 	}
+	
 }
