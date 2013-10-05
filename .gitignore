@@ -5,6 +5,8 @@
 *.pydevproject
 tmp/
 *.tmp
+.metadata
+*classpa*
 *.bak
 *.swp
 *~.nib
