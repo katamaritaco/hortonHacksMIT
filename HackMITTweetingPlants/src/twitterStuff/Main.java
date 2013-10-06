@@ -6,6 +6,9 @@ import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -16,6 +19,9 @@ import winterwell.jtwitter.OAuthSignpostClient;
 import winterwell.jtwitter.Twitter;
 
 import tweetSelection.tweetSelect;
+
+import java.util.*;
+import java.io.*;
 
 public class Main {
 
@@ -40,9 +46,8 @@ public class Main {
 //		twitter.setStatus(status); //set the status
 //	}
 	
-	
-	
-	
+	static ArrayList<String> usedList = new ArrayList<String>();
+
 	
 	
 static String end_result = new String();
@@ -92,8 +97,10 @@ static String end_result = new String();
     	}
     	
     	tweetSelection.tweetSelect datSelection = new tweetSelection.tweetSelect();
+    	String usedString = datSelection.selectATweet(usedList);
+    	System.out.println(usedString);
+    	usedList.add(usedString);
     	
-    	System.out.println(datSelection.selectATweet());
     	
     	end_result = "";
     }
@@ -165,14 +172,17 @@ static String end_result = new String();
             }            
         }
     }
-    
 
     
     public static void main ( String[] args )
     {
         try
         {
-            //(new Main()).connect("COM3");
+            //(new Main()).connect("COM3");   
+        	dataAction();
+        	dataAction();
+        	dataAction();
+
         }
         catch ( Exception e )
         {

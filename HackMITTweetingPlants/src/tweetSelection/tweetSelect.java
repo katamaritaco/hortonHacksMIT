@@ -9,7 +9,7 @@ public class tweetSelect {
 	 * @param args
 	 * @throws IOException 
 	 */
-	public String selectATweet() throws IOException {
+	public String selectATweet(ArrayList<String> usedList) throws IOException {
 		
 		ArrayList<String> weatherGood = new ArrayList<String>();
 		ArrayList<String> weatherBad = new ArrayList<String>();
@@ -30,7 +30,7 @@ public class tweetSelect {
 
 		ArrayList<String> masterList = new ArrayList<String>();
 		
-		ArrayList<String> usedList = new ArrayList<String>();
+		//ArrayList<String> usedList = new ArrayList<String>();
 
 		boolean isWeatherGood = false;//set to false for the time being.
 		boolean isTemperatureGood = false;
@@ -41,9 +41,6 @@ public class tweetSelect {
 		boolean isMiscGood = false;
 		boolean isMoistureGood = false;
 
-		
-		
-		
 		
 		//Read in the file
 		//BufferedReader reader = new BufferedReader(new FileReader("PlantTweets.txt"));
@@ -265,7 +262,7 @@ public class tweetSelect {
 		
 //		System.out.println(weatherGood.toString());
 //		System.out.println(weatherBad.toString());
-		System.out.println(temperatureGood.toString());
+//		System.out.println(temperatureGood.toString());
 //		System.out.println(temperatureBad.toString());
 //		System.out.println(humidityGood.toString());
 //		System.out.println(humidityBad.toString());
@@ -282,20 +279,19 @@ public class tweetSelect {
 
 		//Scanner scan = new Scanner(System.in);
 		
-		System.out.println("Master List:\n" + masterList.toString());
+//		System.out.println("Master List:\n" + masterList.toString());
 		
 		Random random = new Random();
 		int randomValue = random.nextInt(masterList.size()); 
 
 		////////////////////////////////////////////////////////////START NOT TESTED USED QUEUE
-		while(!usedList.contains(masterList.get(randomValue))){
+		while(usedList.contains(masterList.get(randomValue))){
 			randomValue = random.nextInt(masterList.size()); 
-			System.out.println("Random:\n" + masterList.get(randomValue));
-			usedList.add(masterList.get(randomValue));
+//			System.out.println("Random:\n" + masterList.get(randomValue));
 		}
 		///////////////////////////////////////////////////////////END NOT TESTED USED QUEUE
 		
-		
+
 		return masterList.get(randomValue);
 	}
 
