@@ -19,7 +19,7 @@ import java.io.OutputStream;
 import gnu.io.CommPort;
 
 import winterwell.jtwitter.OAuthSignpostClient;
-import winterwell.jtwitter.Twitter;
+import winterwell.jtwitter.*;
 
 import tweetSelection.tweetSelect;
 
@@ -142,11 +142,24 @@ static String end_result = new String();
         	
         	usedList.add(usedString);
         	
+        	
+        	
         	twitter.setStatus(usedString);
+        	tweetCount++;
+        	System.out.println(tweetCount);
         	
         	
-        	List<winterwell.jtwitter.User> users = twitter.users().getFollowers();
-        	for(winterwell.jtwitter.User u: users){
+        	
+        	/*
+        	 * Begin all of the Twitter actions (other than Setting Status which just happened
+        	 * 1. Check if any new followers; if so, follow them too.
+        	 * 2. (Not Finished) Retweet any mentions 
+        	 * 3. (Not started) Check mentions for positivity/negativity and deal with accordingl 
+        	 */
+        	
+        	//Begin Twitter Step 1:
+        	List<User> users = twitter.users().getFollowers();
+        	for(User u: users){
         		if(!u.isFollowedByYou()){
         			//If they are following you but you are NOT following them...
         			twitter.users().follow(u); //follow them
@@ -155,9 +168,17 @@ static String end_result = new String();
         			
         	}
         	
-        	tweetCount++;
-        	System.out.println(tweetCount);
-    		
+        	List<Status> statuses = twitter.getMentions();
+        	User temp;
+        	
+        	for(Status s: statuses){
+        		temp = s.getUser(); 
+        		twitter.setFavorite(s, true);
+        		if(!temp.isFollowingYou())
+        			twitter.users().follow(temp); //follow the user
+        			
+        	}
+        	
         	
     		
     	}
