@@ -93,6 +93,12 @@ static String end_result = new String();
     
     public static void dataAction() throws IOException{
     	
+    	oauthClient = new OAuthSignpostClient(consumerKey, 
+    			consumerSecret, accessToken,
+    			accessTokenSecret);
+    	
+    	twitter = new Twitter("my-name", oauthClient);
+    	
 
     	if (tweetCount > 5){
     		usedList.remove(0);
@@ -133,7 +139,8 @@ static String end_result = new String();
         			"&sound=" + URLEncoder.encode(Double.toString(soundAmount), "UTF-8") + 
         			"&direction=" + URLEncoder.encode(direction, "UTF-8") + 
         			"&humidity=" + URLEncoder.encode(Double.toString(humidity), "UTF-8") + 
-        			"&light=" + URLEncoder.encode(Double.toString(lightAmount), "UTF-8")
+        			"&light=" + URLEncoder.encode(Double.toString(lightAmount), "UTF-8") +
+        			"&dirt=" + URLEncoder.encode(Integer.toString(moisture), "UTF-8")
         	 ); 
         	
         	URLConnection conn = url.openConnection();

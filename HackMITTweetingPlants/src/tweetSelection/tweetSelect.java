@@ -54,7 +54,7 @@ public class tweetSelect {
 		if(sound > 700 || sound < 300){//'loud' values
 			isSoundGood = false;
 		}
-		if(temperature < 70){
+		if(temperature > 70){
 			isTemperatureGood = true;
 		}
 		if(humidity > 60){
