@@ -216,10 +216,9 @@ static String end_result = new String();
         {
             //(new Main()).connect("COM3");  
             dataAction();
-            //dataAction();
 
-            //dataAction();
-            //dataAction();
+            dataAction();
+            dataAction();
 
         }
         catch ( Exception e )

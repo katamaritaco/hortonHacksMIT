@@ -43,6 +43,16 @@ public class tweetSelect {
 
 		int totalTweetSize = 0;
 		
+		/*/////////////////////////////////////////Start Run threshold calculations
+		// light good >= 400
+		// light bad < 400
+		 * 
+		 //above 800 or below 200 is loud.
+		
+		
+		
+		///////////////////////////////////////////End Run Threshold Calculations*/
+		
 		//Read in the file
 		//BufferedReader reader = new BufferedReader(new FileReader("PlantTweets.txt"));
 		BufferedReader reader = new BufferedReader(new FileReader("PlantTweetsSheet.tsv"));
