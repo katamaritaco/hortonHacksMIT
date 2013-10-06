@@ -1,5 +1,8 @@
 package twitterStuff;
 
+import java.io.*;
+import java.net.*;
+
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
@@ -96,6 +99,8 @@ static String end_result = new String();
     	String debug = end_result.replace("\n", "").replace("\r", "");
     	//System.out.println(debug);
     	if(debug.length() > 10){
+    		// get-request: heymitch.com/hortontheplant/?phrase=lololololwut
+    		
     		//twitter.setStatus(debug);
     	}
     	
@@ -106,6 +111,12 @@ static String end_result = new String();
     	
     	
     	System.out.println(usedString);
+    	
+    	URL url = new URL("http://www.heymitch.com/hortontheplant/?phrase=" + URLEncoder.encode(usedString, "UTF-8"));
+	    URLConnection conn = url.openConnection(); 
+
+	    conn.getContent(); 
+    	
     	usedList.add(usedString);
     	
     	tweetCount++;
@@ -185,12 +196,12 @@ static String end_result = new String();
     {
         try
         {
-            //(new Main()).connect("COM3");  
-            dataAction();
-            dataAction();
+            (new Main()).connect("COM3");  
+            //dataAction();
+            //dataAction();
 
-            dataAction();
-            dataAction();
+            //dataAction();
+            //dataAction();
 
         }
         catch ( Exception e )
