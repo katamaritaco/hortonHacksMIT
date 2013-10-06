@@ -99,8 +99,8 @@ static String end_result = new String();
     	
     	twitter = new Twitter("my-name", oauthClient);
     	
-
-    	if (tweetCount > 5){
+    	//Have 10 tweets in the 'cooldown queue'
+    	if (tweetCount > 10){
     		usedList.remove(0);
     	}
     	
