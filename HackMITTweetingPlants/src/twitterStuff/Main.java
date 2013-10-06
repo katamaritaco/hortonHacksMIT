@@ -93,9 +93,8 @@ static String end_result = new String();
     
     public static void dataAction() throws IOException{
     	
-    	System.out.println("Entered");
-    	
-    	if (tweetCount > 2){
+
+    	if (tweetCount > 5){
     		usedList.remove(0);
     	}
     	
@@ -116,11 +115,13 @@ static String end_result = new String();
             String direction = results[2];
             double humidity = Double.parseDouble(results[3]);
             double tempFahrenheit = Double.parseDouble(results[4]);
-
+            int moisture = Integer.parseInt(results[5]);
             
         	tweetSelection.tweetSelect datSelection = new tweetSelection.tweetSelect();
-        	String usedString = datSelection.selectATweet(usedList, lightAmount, soundAmount, direction, humidity, tempFahrenheit);
-        	
+
+        	String usedString = datSelection.selectATweet(usedList, lightAmount, soundAmount, direction, humidity, tempFahrenheit, moisture);
+        	System.out.println("LightAmount: " + lightAmount);
+        	end_result = "";
         	
         	
         	System.out.println(usedString);

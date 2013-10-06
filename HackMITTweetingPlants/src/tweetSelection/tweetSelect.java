@@ -11,12 +11,11 @@ public class tweetSelect {
 	 * @param args
 	 * @throws IOException 
 	 */
-	public String selectATweet(ArrayList<String> usedList, int light, int sound, String direction, double humidity, double temperature) throws IOException {
+	public String selectATweet(ArrayList<String> usedList, int light, int sound, String direction, double humidity, double temperature, int moisture) throws IOException {
 		
 		ArrayList<String> weatherGood = new ArrayList<String>();
 		ArrayList<String> weatherBad = new ArrayList<String>();
 		ArrayList<String> temperatureGood = new ArrayList<String>();
-		ArrayList<String> temperatureNeutral = new ArrayList<String>();
 		ArrayList<String> temperatureBad = new ArrayList<String>();
 		ArrayList<String> humidityGood = new ArrayList<String>();
 		ArrayList<String> humidityBad = new ArrayList<String>();
@@ -28,21 +27,18 @@ public class tweetSelect {
 		ArrayList<String> miscGood = new ArrayList<String>();
 		ArrayList<String> miscBad = new ArrayList<String>();
 		ArrayList<String> moistureGood = new ArrayList<String>();
-		ArrayList<String> moistureNeutral = new ArrayList<String>();
 		ArrayList<String> moistureBad = new ArrayList<String>();
 
 		ArrayList<String> masterList = new ArrayList<String>();
 		
-		//ArrayList<String> usedList = new ArrayList<String>();
-
 		boolean isWeatherGood = false;//set to false for the time being.
 		boolean isHumidityGood = false;//true = high; false = low
 		boolean isTiltGood = false;//can only be false
 		boolean isLightGood = false;
 		boolean isSoundGood = true;
 		//boolean isMiscGood = false;
-		int moistureGoodEnum = 0;//0 = bad, 1 = neutral, 2 = good
-		int temperatureGoodEnum = 0;//0 = bad, 1 = neutral, 2 = good
+		boolean isMoistureGood = false;
+		boolean isTemperatureGood = false;
 
 		int totalTweetSize = 0;
 		
@@ -56,22 +52,17 @@ public class tweetSelect {
 			isLightGood = true;
 		}
 		if(sound > 700 || sound < 300){//'loud' values
-			
 			isSoundGood = false;
 		}
-		if(temperature < 75 && temperature > 65){
-			temperatureGoodEnum = 2;
-		}
-		else if((temperature < 85 && temperature >= 75) || (temperature <= 65 && temperature > 55)){
-			temperatureGoodEnum = 1;
-		}
-		else{
-			temperatureGoodEnum = 0;
+		if(temperature < 70){
+			isTemperatureGood = true;
 		}
 		if(humidity > 60){
 			isHumidityGood = true;
 		}
-		
+		if(moisture > 250){
+			isMoistureGood = true;
+		}
 		weatherAPIZ.weather weather= new weatherAPIZ.weather();
 		isWeatherGood = weather.isWeatherGood();
 		
@@ -117,15 +108,6 @@ public class tweetSelect {
 				}
 				totalTweetSize--;
 				temperatureGood.remove(0);
-			}
-			if(line.contains("TemperatureNeutral")){
-				String[] parts = line.split("\t");
-				for (String part : parts) {
-					temperatureNeutral.add(part);
-					totalTweetSize++;
-				}
-				totalTweetSize--;
-				temperatureNeutral.remove(0);
 			}
 			if(line.contains("TemperatureBad")){
 				String[] parts = line.split("\t");
@@ -250,15 +232,6 @@ public class tweetSelect {
 				totalTweetSize--;
 				moistureGood.remove(0);
 			}
-			if(line.contains("MoistureNeutral")){
-				String[] parts = line.split("\t");
-				for (String part : parts) {
-					moistureNeutral.add(part);
-					totalTweetSize++;
-				}
-				totalTweetSize--;
-				moistureNeutral.remove(0);
-			}
 			if(line.contains("MoistureBad")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
@@ -282,14 +255,11 @@ public class tweetSelect {
 		else if (!isWeatherGood){
 			masterList.addAll(weatherBad);
 		}
-		if(temperatureGoodEnum == 0){
-			masterList.addAll(temperatureBad);
-		}
-		else if (temperatureGoodEnum == 1){
-			masterList.addAll(temperatureNeutral);
-		}
-		else if (temperatureGoodEnum == 2){
+		if(isTemperatureGood){
 			masterList.addAll(temperatureGood);
+		}
+		else if (!isTemperatureGood){
+			masterList.addAll(temperatureBad);
 		}
 		if(isHumidityGood){
 			masterList.addAll(humidityGood);
@@ -318,21 +288,12 @@ public class tweetSelect {
 //		else if (!isMiscGood){
 			masterList.addAll(miscBad);
 //		}		
-		if(moistureGoodEnum == 0){
-			masterList.addAll(moistureBad);
-		}
-		else if (moistureGoodEnum == 1){
-			masterList.addAll(moistureNeutral);
-		}
-		else if (moistureGoodEnum == 2){
+		if(isMoistureGood){
 			masterList.addAll(moistureGood);
 		}
-		//Check all boolean thresholds
-		//Add appropriate list to master list
-		
-		//randomly select from master list
-
-		//send tweet.
+		else if (!isMoistureGood){
+			masterList.addAll(moistureBad);
+		}
 		
 //		System.out.println(weatherGood.toString());
 //		System.out.println(weatherBad.toString());
@@ -350,30 +311,18 @@ public class tweetSelect {
 //		System.out.println(moistureGood.toString());
 //		System.out.println(moistureBad.toString());
 
-		//Scanner scan = new Scanner(System.in);
-		
-//		System.out.println("Master List:\n" + masterList.toString());
 		
 		Random random = new Random();
 		int randomValue = random.nextInt(masterList.size()); 
 
-		//Check to see if no elements left.
-	
 		
-		////////////////////////////////////////////////////////////START NOT TESTED USED QUEUE
 		String str = masterList.get(randomValue);
 		while(usedList.contains(str)){
-//			if(usedList.size() == masterList.size()){
-//				str = "Wow... My owners haven't reset me in a long time... #abandoned";
-//				break;
-//			}
 			
 			randomValue = random.nextInt(masterList.size()); 
 			str = masterList.get(randomValue);
-//			System.out.println("Random:\n" + masterList.get(randomValue));
 			
 		}
-		///////////////////////////////////////////////////////////END NOT TESTED USED QUEUE
 		
 
 		return str;
