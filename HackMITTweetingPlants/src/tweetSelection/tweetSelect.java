@@ -55,7 +55,8 @@ public class tweetSelect {
 		if(light  >= 400){//this is bright!
 			isLightGood = true;
 		}
-		if(sound > 800 || sound < 200){//'loud' values
+		if(sound > 700 || sound < 300){//'loud' values
+			
 			isSoundGood = false;
 		}
 		if(temperature < 75 && temperature > 65){

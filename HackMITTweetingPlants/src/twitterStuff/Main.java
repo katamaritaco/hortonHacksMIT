@@ -92,6 +92,7 @@ static String end_result = new String();
     }
     
     public static void dataAction() throws IOException{
+    	
     	if (tweetCount > 2){
     		usedList.remove(0);
     	}
@@ -104,39 +105,56 @@ static String end_result = new String();
     	if(debug.length() > 10){
     		// get-request: heymitch.com/hortontheplant/?phrase=lololololwut
     		
-    		//twitter.setStatus(debug);
+    		
+    		
+    		
+    		
+    		
+            String[] results = end_result.split(",");
+            int lightAmount = Integer.parseInt(results[0]);
+            int soundAmount = Integer.parseInt(results[1]);
+            String direction = results[2];
+            double humidity = Double.parseDouble(results[3]);
+            double tempFahrenheit = Double.parseDouble(results[4]);
+
+            
+        	tweetSelection.tweetSelect datSelection = new tweetSelection.tweetSelect();
+        	String usedString = datSelection.selectATweet(usedList, lightAmount, soundAmount, direction, humidity, tempFahrenheit);
+        	System.out.println("LightAmount: " + lightAmount);
+        	end_result = "";
+        	
+        	
+        	//System.out.println(usedString);
+        	
+        	URL url = new URL(
+        			"http://www.heymitch.com/hortontheplant/" + 
+        			"?phrase=" + URLEncoder.encode(usedString, "UTF-8") +
+        			"&temperature=" + URLEncoder.encode( Double.toString(tempFahrenheit), "UTF-8") + 
+        			"&sound=" + URLEncoder.encode(Double.toString(soundAmount), "UTF-8") + 
+        			"&direction=" + URLEncoder.encode(direction, "UTF-8") + 
+        			"&humidity=" + URLEncoder.encode(Double.toString(humidity), "UTF-8") + 
+        			"&light=" + URLEncoder.encode(Double.toString(lightAmount), "UTF-8")
+        	 ); 
+        	
+        	URLConnection conn = url.openConnection();
+
+    	    conn.getContent(); 
+        	
+        	usedList.add(usedString);
+        	
+        	twitter.setStatus(usedString);
+        	
+        	tweetCount++;
+        	System.out.println(tweetCount);
+    		
+    		
+    		
+    		
+    		
+    		
     	}
     	
-    	end_result = "844,545,RIGHT,46.1,75.48"; //temporary
-        String[] results = end_result.split(",");
-        int lightAmount = Integer.parseInt(results[0]);
-        int soundAmount = Integer.parseInt(results[1]);
-        String direction = results[2];
-        double humidity = Double.parseDouble(results[3]);
-        double tempFahrenheit = Double.parseDouble(results[4]);
-        
-        for(String s: results){
-        	System.out.print(s + " ");
-        }
-        System.out.println();
-        
-    	tweetSelection.tweetSelect datSelection = new tweetSelection.tweetSelect();
-    	String usedString = datSelection.selectATweet(usedList, lightAmount, soundAmount, direction, humidity, tempFahrenheit);
-    	    	
-    	end_result = "";
     	
-    	
-    	System.out.println(usedString);
-    	
-    	//URL url = new URL("http://www.heymitch.com/hortontheplant/?phrase=" + URLEncoder.encode(usedString, "UTF-8"));
-	    //URLConnection conn = url.openConnection(); 
-
-	    //conn.getContent(); 
-    	
-    	usedList.add(usedString);
-    	
-    	tweetCount++;
-    	System.out.println(tweetCount);
     	
     }
     
@@ -214,10 +232,10 @@ static String end_result = new String();
     {
         try
         {
-            //(new Main()).connect("COM3");  
-            dataAction();
-            dataAction();
-            dataAction();
+            (new Main()).connect("COM3");  
+            //dataAction();
+            //dataAction();
+            //dataAction();
 
         }
         catch ( Exception e )

@@ -7,7 +7,6 @@ import org.apache.commons.*;
 
 public class weather{
 
-
 	public boolean isWeatherGood() throws MalformedURLException, IOException{
 		InputStream response = new URL("http://api.wunderground.com/api/5cfaadd65f3a7e60/conditions/q/MA/Cambridge.json").openStream();
 
