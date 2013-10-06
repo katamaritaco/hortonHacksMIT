@@ -160,7 +160,7 @@ static String end_result = new String();
         	/*
         	 * Begin all of the Twitter actions (other than Setting Status which just happened
         	 * 1. Check if any new followers; if so, follow them too.
-        	 * 2. (Not Finished) Retweet any mentions 
+        	 * 2. Retweet any mentions 
         	 * 3. (Not started) Check mentions for positivity/negativity and deal with accordingl 
         	 */
         	
