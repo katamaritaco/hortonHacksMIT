@@ -97,6 +97,9 @@ static String end_result = new String();
     	}
 
     	String debug = end_result.replace("\n", "").replace("\r", "");
+    	
+
+        
     	//System.out.println(debug);
     	if(debug.length() > 10){
     		// get-request: heymitch.com/hortontheplant/?phrase=lololololwut
@@ -104,6 +107,19 @@ static String end_result = new String();
     		//twitter.setStatus(debug);
     	}
     	
+    	end_result = "844,545,RIGHT,46.1,75.48"; //temporary
+        String[] results = end_result.split(",");
+        int lightAmount = Integer.parseInt(results[0]);
+        int soundAmount = Integer.parseInt(results[1]);
+        String direction = results[2];
+        double humidity = Double.parseDouble(results[3]);
+        double tempFahrenheit = Double.parseDouble(results[4]);
+        
+        for(String s: results){
+        	System.out.print(s + " ");
+        }
+        System.out.println();
+        
     	tweetSelection.tweetSelect datSelection = new tweetSelection.tweetSelect();
     	String usedString = datSelection.selectATweet(usedList);
     	    	
@@ -112,15 +128,16 @@ static String end_result = new String();
     	
     	System.out.println(usedString);
     	
-    	URL url = new URL("http://www.heymitch.com/hortontheplant/?phrase=" + URLEncoder.encode(usedString, "UTF-8"));
-	    URLConnection conn = url.openConnection(); 
+    	//URL url = new URL("http://www.heymitch.com/hortontheplant/?phrase=" + URLEncoder.encode(usedString, "UTF-8"));
+	    //URLConnection conn = url.openConnection(); 
 
-	    conn.getContent(); 
+	    //conn.getContent(); 
     	
     	usedList.add(usedString);
     	
     	tweetCount++;
     	System.out.println(tweetCount);
+    	
     }
     
     /**
@@ -152,7 +169,8 @@ static String end_result = new String();
                     buffer[len++] = (byte) data;
                 }
                 end_result += new String(buffer,0,len);
-                //System.out.print(new String(buffer,0,len));
+                
+                System.out.print(new String(buffer,0,len));
             }
             catch ( IOException e )
             {
@@ -196,8 +214,8 @@ static String end_result = new String();
     {
         try
         {
-            (new Main()).connect("COM3");  
-            //dataAction();
+            //(new Main()).connect("COM3");  
+            dataAction();
             //dataAction();
 
             //dataAction();
