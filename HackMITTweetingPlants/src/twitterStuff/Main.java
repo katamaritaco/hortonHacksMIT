@@ -101,13 +101,13 @@ static String end_result = new String();
     	
 
         
-    	//System.out.println(debug);
+    	System.out.println(debug);
     	if(debug.length() > 10){
-    		// get-request: heymitch.com/hortontheplant/?phrase=lololololwut
+    		 //get-request: heymitch.com/hortontheplant/?phrase=lololololwut
     		
     		
     		
-    		
+    		//end_result = "123,456,LEFT,1.23,4.56"; Temporary; for testing w/o sensor
     		
     		
             String[] results = end_result.split(",");
@@ -124,7 +124,7 @@ static String end_result = new String();
         	end_result = "";
         	
         	
-        	//System.out.println(usedString);
+        	System.out.println(usedString);
         	
         	URL url = new URL(
         			"http://www.heymitch.com/hortontheplant/" + 
@@ -144,13 +144,21 @@ static String end_result = new String();
         	
         	twitter.setStatus(usedString);
         	
+        	
+        	List<winterwell.jtwitter.User> users = twitter.users().getFollowers();
+        	for(winterwell.jtwitter.User u: users){
+        		if(!u.isFollowedByYou()){
+        			//If they are following you but you are NOT following them...
+        			twitter.users().follow(u); //follow them
+        			//System.out.println(u.name);
+        		}
+        			
+        	}
+        	
         	tweetCount++;
         	System.out.println(tweetCount);
     		
-    		
-    		
-    		
-    		
+        	
     		
     	}
     	
@@ -232,8 +240,8 @@ static String end_result = new String();
     {
         try
         {
-            (new Main()).connect("COM3");  
-            //dataAction();
+            //(new Main()).connect("COM3");  
+            dataAction();
             //dataAction();
             //dataAction();
 
