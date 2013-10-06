@@ -121,7 +121,7 @@ static String end_result = new String();
         System.out.println();
         
     	tweetSelection.tweetSelect datSelection = new tweetSelection.tweetSelect();
-    	String usedString = datSelection.selectATweet(usedList);
+    	String usedString = datSelection.selectATweet(usedList, lightAmount, soundAmount, direction, humidity, tempFahrenheit);
     	    	
     	end_result = "";
     	
@@ -216,7 +216,6 @@ static String end_result = new String();
         {
             //(new Main()).connect("COM3");  
             dataAction();
-
             dataAction();
             dataAction();
 

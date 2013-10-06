@@ -3,21 +3,23 @@ package tweetSelection;
 import java.util.*;
 import java.io.*;
 
+import weatherAPIZ.weather;
+
 public class tweetSelect {
 
 	/**
 	 * @param args
 	 * @throws IOException 
 	 */
-	public String selectATweet(ArrayList<String> usedList) throws IOException {
+	public String selectATweet(ArrayList<String> usedList, int light, int sound, String direction, double humidity, double temperature) throws IOException {
 		
 		ArrayList<String> weatherGood = new ArrayList<String>();
 		ArrayList<String> weatherBad = new ArrayList<String>();
 		ArrayList<String> temperatureGood = new ArrayList<String>();
+		ArrayList<String> temperatureNeutral = new ArrayList<String>();
 		ArrayList<String> temperatureBad = new ArrayList<String>();
 		ArrayList<String> humidityGood = new ArrayList<String>();
 		ArrayList<String> humidityBad = new ArrayList<String>();
-		ArrayList<String> tiltGood = new ArrayList<String>();
 		ArrayList<String> tiltBad = new ArrayList<String>();
 		ArrayList<String> lightGood = new ArrayList<String>();
 		ArrayList<String> lightBad = new ArrayList<String>();
@@ -26,6 +28,7 @@ public class tweetSelect {
 		ArrayList<String> miscGood = new ArrayList<String>();
 		ArrayList<String> miscBad = new ArrayList<String>();
 		ArrayList<String> moistureGood = new ArrayList<String>();
+		ArrayList<String> moistureNeutral = new ArrayList<String>();
 		ArrayList<String> moistureBad = new ArrayList<String>();
 
 		ArrayList<String> masterList = new ArrayList<String>();
@@ -33,23 +36,43 @@ public class tweetSelect {
 		//ArrayList<String> usedList = new ArrayList<String>();
 
 		boolean isWeatherGood = false;//set to false for the time being.
-		boolean isTemperatureGood = false;
-		boolean isHumidityGood = false;
-		boolean isTiltGood = false;
+		boolean isHumidityGood = false;//true = high; false = low
+		boolean isTiltGood = false;//can only be false
 		boolean isLightGood = false;
-		boolean isSoundGood = false;
+		boolean isSoundGood = true;
 		boolean isMiscGood = false;
-		boolean isMoistureGood = false;
+		int moistureGoodEnum = 0;//0 = bad, 1 = neutral, 2 = good
+		int temperatureGoodEnum = 0;//0 = bad, 1 = neutral, 2 = good
 
 		int totalTweetSize = 0;
 		
-		/*/////////////////////////////////////////Start Run threshold calculations
+		//////////////////////////////////////////Start Run threshold calculations
 		// light good >= 400
 		// light bad < 400
-		 * 
+		 
 		 //above 800 or below 200 is loud.
+
+		if(light  >= 400){//this is bright!
+			isLightGood = true;
+		}
+		if(sound > 800 || sound < 200){//'loud' values
+			isSoundGood = false;
+		}
+		if(temperature < 75 && temperature > 65){
+			temperatureGoodEnum = 2;
+		}
+		else if((temperature < 85 && temperature >= 75) || (temperature <= 65 && temperature > 55)){
+			temperatureGoodEnum = 1;
+		}
+		else{
+			temperatureGoodEnum = 0;
+		}
+		if(humidity > 60){
+			isHumidityGood = true;
+		}
 		
-		
+		weatherAPIZ.weather weather= new weatherAPIZ.weather();
+		isWeatherGood = weather.isWeatherGood();
 		
 		///////////////////////////////////////////End Run Threshold Calculations*/
 		
@@ -94,6 +117,15 @@ public class tweetSelect {
 				totalTweetSize--;
 				temperatureGood.remove(0);
 			}
+			if(line.contains("TemperatureNeutral")){
+				String[] parts = line.split("\t");
+				for (String part : parts) {
+					temperatureNeutral.add(part);
+					totalTweetSize++;
+				}
+				totalTweetSize--;
+				temperatureNeutral.remove(0);
+			}
 			if(line.contains("TemperatureBad")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
@@ -131,15 +163,6 @@ public class tweetSelect {
 			//=======================================================================================\\
 
 		///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt 
-			if(line.contains("TiltGood")){
-				String[] parts = line.split("\t");
-				for (String part : parts) {
-					tiltGood.add(part);
-					totalTweetSize++;
-				}
-				totalTweetSize--;
-				tiltGood.remove(0);
-			}
 			if(line.contains("TiltBad")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
@@ -226,6 +249,15 @@ public class tweetSelect {
 				totalTweetSize--;
 				moistureGood.remove(0);
 			}
+			if(line.contains("MoistureNeutral")){
+				String[] parts = line.split("\t");
+				for (String part : parts) {
+					moistureNeutral.add(part);
+					totalTweetSize++;
+				}
+				totalTweetSize--;
+				moistureNeutral.remove(0);
+			}
 			if(line.contains("MoistureBad")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
@@ -249,11 +281,14 @@ public class tweetSelect {
 		else if (!isWeatherGood){
 			masterList.addAll(weatherBad);
 		}
-		if(isTemperatureGood){
-			masterList.addAll(temperatureGood);
-		}
-		else if (!isTemperatureGood){
+		if(temperatureGoodEnum == 0){
 			masterList.addAll(temperatureBad);
+		}
+		else if (temperatureGoodEnum == 1){
+			masterList.addAll(temperatureNeutral);
+		}
+		else if (temperatureGoodEnum == 2){
+			masterList.addAll(temperatureGood);
 		}
 		if(isHumidityGood){
 			masterList.addAll(humidityGood);
@@ -261,10 +296,7 @@ public class tweetSelect {
 		else if (!isHumidityGood){
 			masterList.addAll(humidityBad);
 		}
-		if(isTiltGood){
-			masterList.addAll(tiltGood);
-		}
-		else if (!isTiltGood){
+		if(!isTiltGood){
 			masterList.addAll(tiltBad);
 		}
 		if(isLightGood){
@@ -285,22 +317,20 @@ public class tweetSelect {
 		else if (!isMiscGood){
 			masterList.addAll(miscBad);
 		}		
-		if(isMoistureGood){
-			masterList.addAll(moistureGood);
-		}
-		else if (!isMoistureGood){
+		if(moistureGoodEnum == 0){
 			masterList.addAll(moistureBad);
+		}
+		else if (moistureGoodEnum == 1){
+			masterList.addAll(moistureNeutral);
+		}
+		else if (moistureGoodEnum == 2){
+			masterList.addAll(moistureGood);
 		}
 		//Check all boolean thresholds
 		//Add appropriate list to master list
 		
 		//randomly select from master list
 
-		
-		
-		
-		
-		
 		//send tweet.
 		
 //		System.out.println(weatherGood.toString());
@@ -309,7 +339,6 @@ public class tweetSelect {
 //		System.out.println(temperatureBad.toString());
 //		System.out.println(humidityGood.toString());
 //		System.out.println(humidityBad.toString());
-//		System.out.println(tiltGood.toString());
 //		System.out.println(tiltBad.toString());
 //		System.out.println(lightGood.toString());
 //		System.out.println(lightBad.toString());
