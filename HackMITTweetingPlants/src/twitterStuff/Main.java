@@ -98,12 +98,14 @@ static String end_result = new String();
     	if (tweetCount > 2){
     		usedList.remove(0);
     	}
+    	
+    	System.out.println("end_result: " + end_result);
 
     	String debug = end_result.replace("\n", "").replace("\r", "");
     	
 
 
-    	if(end_result.replace("\n", "").replace("\r", "").split(",").length >= 4){
+    	if(end_result.replace("\n", "").replace("\r", "").split(",").length >= 5){
 
     		
     		System.out.println("Passed");
@@ -143,7 +145,7 @@ static String end_result = new String();
         	
         	twitter.setStatus(usedString);
         	tweetCount++;
-        	System.out.println(tweetCount);
+        	System.out.println("Tweet Posted. Tweet Count: " + tweetCount);
         	
         	
         	
@@ -180,7 +182,7 @@ static String end_result = new String();
     		
     	} else{
     		System.out.println("Length: " + end_result.replace("\n", "").replace("\r", "").split(",").length);
-    		System.out.println(end_result.replace("\n", "").replace("\r", "").split(","));
+    		System.out.println(Arrays.deepToString(end_result.replace("\n", "").replace("\r", "").split(",")));
     	}
     	
     	end_result = "";
@@ -211,15 +213,13 @@ static String end_result = new String();
                 int len = 0;
                 while ( ( data = in.read()) > -1 )
                 {
-                    if ( data == '\n' ) {
+                    if ( data == '\n' || data == '\r') {
                     	dataAction();
                         break;
                     }
                     buffer[len++] = (byte) data;
                 }
                 end_result += new String(buffer,0,len);
-                
-                System.out.print(new String(buffer,0,len));
             }
             catch ( IOException e )
             {
@@ -263,10 +263,7 @@ static String end_result = new String();
     {
         try
         {
-            //(new Main()).connect("COM3");  
-            dataAction();
-            //dataAction();
-            //dataAction();
+            (new Main()).connect("COM3");  
 
         }
         catch ( Exception e )
