@@ -93,9 +93,8 @@ static String end_result = new String();
     
     public static void dataAction() throws IOException{
     	
-    	System.out.println("Entered");
-    	
-    	if (tweetCount > 2){
+
+    	if (tweetCount > 5){
     		usedList.remove(0);
     	}
 
