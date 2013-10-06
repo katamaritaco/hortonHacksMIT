@@ -93,6 +93,8 @@ static String end_result = new String();
     
     public static void dataAction() throws IOException{
     	
+    	System.out.println("Entered");
+    	
     	if (tweetCount > 2){
     		usedList.remove(0);
     	}
@@ -102,13 +104,9 @@ static String end_result = new String();
 
         
     	//System.out.println(debug);
-    	if(debug.length() > 10){
-    		// get-request: heymitch.com/hortontheplant/?phrase=lololololwut
+    	if(end_result.replace("\n", "").replace("\r", "").split(",").length >= 4){
     		
-    		
-    		
-    		
-    		
+    		System.out.println("Passed");
     		
             String[] results = end_result.split(",");
             int lightAmount = Integer.parseInt(results[0]);
@@ -120,8 +118,7 @@ static String end_result = new String();
             
         	tweetSelection.tweetSelect datSelection = new tweetSelection.tweetSelect();
         	String usedString = datSelection.selectATweet(usedList, lightAmount, soundAmount, direction, humidity, tempFahrenheit);
-        	System.out.println("LightAmount: " + lightAmount);
-        	end_result = "";
+        	
         	
         	
         	//System.out.println(usedString);
@@ -152,7 +149,12 @@ static String end_result = new String();
     		
     		
     		
+    	} else{
+    		System.out.println("Length: " + end_result.replace("\n", "").replace("\r", "").split(",").length);
+    		System.out.println(end_result.replace("\n", "").replace("\r", "").split(","));
     	}
+    	
+    	end_result = "";
     	
     	
     	
