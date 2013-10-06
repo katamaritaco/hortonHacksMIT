@@ -19,7 +19,7 @@ import java.io.OutputStream;
 import gnu.io.CommPort;
 
 import winterwell.jtwitter.OAuthSignpostClient;
-import winterwell.jtwitter.Twitter;
+import winterwell.jtwitter.*;
 
 import tweetSelection.tweetSelect;
 
@@ -102,9 +102,9 @@ static String end_result = new String();
     	String debug = end_result.replace("\n", "").replace("\r", "");
     	
 
-        
-    	//System.out.println(debug);
+
     	if(end_result.replace("\n", "").replace("\r", "").split(",").length >= 4){
+
     		
     		System.out.println("Passed");
     		
@@ -121,7 +121,7 @@ static String end_result = new String();
         	
         	
         	
-        	//System.out.println(usedString);
+        	System.out.println(usedString);
         	
         	URL url = new URL(
         			"http://www.heymitch.com/hortontheplant/" + 
@@ -139,15 +139,44 @@ static String end_result = new String();
         	
         	usedList.add(usedString);
         	
-        	twitter.setStatus(usedString);
         	
+        	
+        	twitter.setStatus(usedString);
         	tweetCount++;
         	System.out.println(tweetCount);
-    		
-    		
-    		
-    		
-    		
+        	
+        	
+        	
+        	/*
+        	 * Begin all of the Twitter actions (other than Setting Status which just happened
+        	 * 1. Check if any new followers; if so, follow them too.
+        	 * 2. (Not Finished) Retweet any mentions 
+        	 * 3. (Not started) Check mentions for positivity/negativity and deal with accordingl 
+        	 */
+        	
+        	//Begin Twitter Step 1:
+        	List<User> users = twitter.users().getFollowers();
+        	for(User u: users){
+        		if(!u.isFollowedByYou()){
+        			//If they are following you but you are NOT following them...
+        			twitter.users().follow(u); //follow them
+        			//System.out.println(u.name);
+        		}
+        			
+        	}
+        	
+        	List<Status> statuses = twitter.getMentions();
+        	User temp;
+        	
+        	for(Status s: statuses){
+        		temp = s.getUser(); 
+        		twitter.setFavorite(s, true);
+        		if(!temp.isFollowingYou())
+        			twitter.users().follow(temp); //follow the user
+        			
+        	}
+        	
+        	
     		
     	} else{
     		System.out.println("Length: " + end_result.replace("\n", "").replace("\r", "").split(",").length);
@@ -234,8 +263,8 @@ static String end_result = new String();
     {
         try
         {
-            (new Main()).connect("COM3");  
-            //dataAction();
+            //(new Main()).connect("COM3");  
+            dataAction();
             //dataAction();
             //dataAction();
 
