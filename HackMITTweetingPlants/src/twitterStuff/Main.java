@@ -15,6 +15,8 @@ import gnu.io.CommPort;
 import winterwell.jtwitter.OAuthSignpostClient;
 import winterwell.jtwitter.Twitter;
 
+import tweetSelection.tweetSelect;
+
 public class Main {
 
 	
@@ -82,12 +84,17 @@ static String end_result = new String();
         }     
     }
     
-    public static void dataAction(){
+    public static void dataAction() throws IOException{
     	String debug = end_result.replace("\n", "").replace("\r", "");
-    	System.out.println(debug);
+    	//System.out.println(debug);
     	if(debug.length() > 10){
     		//twitter.setStatus(debug);
     	}
+    	
+    	tweetSelection.tweetSelect datSelection = new tweetSelection.tweetSelect();
+    	
+    	System.out.println(datSelection.selectATweet());
+    	
     	end_result = "";
     }
     
@@ -165,7 +172,7 @@ static String end_result = new String();
     {
         try
         {
-            (new Main()).connect("COM3");
+            //(new Main()).connect("COM3");
         }
         catch ( Exception e )
         {

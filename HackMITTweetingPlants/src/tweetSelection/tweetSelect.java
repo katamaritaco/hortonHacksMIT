@@ -9,7 +9,7 @@ public class tweetSelect {
 	 * @param args
 	 * @throws IOException 
 	 */
-	public static void main(String[] args) throws IOException {
+	public String selectATweet() throws IOException {
 		
 		ArrayList<String> weatherGood = new ArrayList<String>();
 		ArrayList<String> weatherBad = new ArrayList<String>();
@@ -286,7 +286,7 @@ public class tweetSelect {
 		
 		Random random = new Random();
 		int randomValue = random.nextInt(masterList.size()); 
-		
+
 		////////////////////////////////////////////////////////////START NOT TESTED USED QUEUE
 		while(!usedList.contains(masterList.get(randomValue))){
 			randomValue = random.nextInt(masterList.size()); 
@@ -294,6 +294,9 @@ public class tweetSelect {
 			usedList.add(masterList.get(randomValue));
 		}
 		///////////////////////////////////////////////////////////END NOT TESTED USED QUEUE
+		
+		
+		return masterList.get(randomValue);
 	}
 
 }
