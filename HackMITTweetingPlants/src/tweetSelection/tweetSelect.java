@@ -41,6 +41,7 @@ public class tweetSelect {
 		boolean isMiscGood = false;
 		boolean isMoistureGood = false;
 
+		int totalTweetSize = 0;
 		
 		//Read in the file
 		//BufferedReader reader = new BufferedReader(new FileReader("PlantTweets.txt"));
@@ -55,14 +56,18 @@ public class tweetSelect {
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					weatherGood.add(part);
+					totalTweetSize++;
 				}
+				totalTweetSize--;
 				weatherGood.remove(0);
 			}
 			if(line.contains("WeatherBad")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					weatherBad.add(part);
+					totalTweetSize++;
 				}
+				totalTweetSize--;
 				weatherBad.remove(0);
 			}
 		///// WEATHER ///// WEATHER ///// WEATHER ///// WEATHER ///// WEATHER ///// WEATHER
@@ -74,14 +79,18 @@ public class tweetSelect {
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					temperatureGood.add(part);
+					totalTweetSize++;
 				}
+				totalTweetSize--;
 				temperatureGood.remove(0);
 			}
 			if(line.contains("TemperatureBad")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					temperatureBad.add(part);
+					totalTweetSize++;
 				}
+				totalTweetSize--;
 				temperatureBad.remove(0);
 			}
 		///// Temperature ///// Temperature ///// Temperature ///// Temperature ///// Temperature 
@@ -93,14 +102,18 @@ public class tweetSelect {
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					humidityGood.add(part);
+					totalTweetSize++;
 				}
+				totalTweetSize--;
 				humidityGood.remove(0);
 			}
 			if(line.contains("HumidityBad")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					humidityBad.add(part);
+					totalTweetSize++;
 				}
+				totalTweetSize--;
 				humidityBad.remove(0);
 			}
 		///// Humidity ///// Humidity ///// Humidity ///// Humidity ///// Humidity ///// Humidity 
@@ -112,14 +125,18 @@ public class tweetSelect {
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					tiltGood.add(part);
+					totalTweetSize++;
 				}
+				totalTweetSize--;
 				tiltGood.remove(0);
 			}
 			if(line.contains("TiltBad")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					tiltBad.add(part);
+					totalTweetSize++;
 				}
+				totalTweetSize--;
 				tiltBad.remove(0);
 			}
 		///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt ///// Tilt 
@@ -131,14 +148,18 @@ public class tweetSelect {
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					lightGood.add(part);
+					totalTweetSize++;
 				}
+				totalTweetSize--;
 				lightGood.remove(0);
 			}
 			if(line.contains("LightBad")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					lightBad.add(part);
+					totalTweetSize++;
 				}
+				totalTweetSize--;
 				lightBad.remove(0);
 			}
 		///// Light ///// Light ///// Light ///// Light ///// Light ///// Light ///// Light ///// Light 
@@ -148,14 +169,18 @@ public class tweetSelect {
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					soundGood.add(part);
+					totalTweetSize++;
 				}
+				totalTweetSize--;
 				soundGood.remove(0);
 			}
 			if(line.contains("SoundBad")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					soundBad.add(part);
+					totalTweetSize++;
 				}
+				totalTweetSize--;
 				soundBad.remove(0);
 			}
 		///// Sound ///// Sound ///// Sound ///// Sound ///// Sound ///// Sound ///// Sound 
@@ -165,14 +190,18 @@ public class tweetSelect {
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					miscGood.add(part);
+					totalTweetSize++;
 				}
+				totalTweetSize--;
 				miscGood.remove(0);
 			}
 			if(line.contains("MiscGood")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					miscBad.add(part);
+					totalTweetSize++;
 				}
+				totalTweetSize--;
 				miscBad.remove(0);
 			}
 		///// Misc ///// Misc ///// Misc ///// Misc ///// Misc ///// Misc ///// Misc ///// Misc 
@@ -182,14 +211,18 @@ public class tweetSelect {
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					moistureGood.add(part);
+					totalTweetSize++;
 				}
+				totalTweetSize--;
 				moistureGood.remove(0);
 			}
 			if(line.contains("MoistureBad")){
 				String[] parts = line.split("\t");
 				for (String part : parts) {
 					moistureBad.add(part);
+					totalTweetSize++;
 				}
+				totalTweetSize--;
 				moistureBad.remove(0);
 			}
 		///// Moisture ///// Moisture ///// Moisture ///// Moisture ///// Moisture ///// Moisture 
@@ -284,15 +317,26 @@ public class tweetSelect {
 		Random random = new Random();
 		int randomValue = random.nextInt(masterList.size()); 
 
+		//Check to see if no elements left.
+	
+		
 		////////////////////////////////////////////////////////////START NOT TESTED USED QUEUE
-		while(usedList.contains(masterList.get(randomValue))){
+		String str = masterList.get(randomValue);
+		while(usedList.contains(str)){
+//			if(usedList.size() == masterList.size()){
+//				str = "Wow... My owners haven't reset me in a long time... #abandoned";
+//				break;
+//			}
+			
 			randomValue = random.nextInt(masterList.size()); 
+			str = masterList.get(randomValue);
 //			System.out.println("Random:\n" + masterList.get(randomValue));
+			
 		}
 		///////////////////////////////////////////////////////////END NOT TESTED USED QUEUE
 		
 
-		return masterList.get(randomValue);
+		return str;
 	}
 
 }

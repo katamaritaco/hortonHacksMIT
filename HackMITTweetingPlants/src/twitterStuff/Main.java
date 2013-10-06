@@ -47,8 +47,7 @@ public class Main {
 //	}
 	
 	static ArrayList<String> usedList = new ArrayList<String>();
-
-	
+	static int tweetCount = 0;
 	
 static String end_result = new String();
 	
@@ -90,6 +89,10 @@ static String end_result = new String();
     }
     
     public static void dataAction() throws IOException{
+    	if (tweetCount > 2){
+    		usedList.remove(0);
+    	}
+
     	String debug = end_result.replace("\n", "").replace("\r", "");
     	//System.out.println(debug);
     	if(debug.length() > 10){
@@ -98,11 +101,15 @@ static String end_result = new String();
     	
     	tweetSelection.tweetSelect datSelection = new tweetSelection.tweetSelect();
     	String usedString = datSelection.selectATweet(usedList);
+    	    	
+    	end_result = "";
+    	
+    	
     	System.out.println(usedString);
     	usedList.add(usedString);
     	
-    	
-    	end_result = "";
+    	tweetCount++;
+    	System.out.println(tweetCount);
     }
     
     /**
@@ -178,10 +185,12 @@ static String end_result = new String();
     {
         try
         {
-            //(new Main()).connect("COM3");   
-        	dataAction();
-        	dataAction();
-        	dataAction();
+            //(new Main()).connect("COM3");  
+            dataAction();
+            dataAction();
+
+            dataAction();
+            dataAction();
 
         }
         catch ( Exception e )
