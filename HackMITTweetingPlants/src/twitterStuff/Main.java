@@ -114,11 +114,13 @@ static String end_result = new String();
             String direction = results[2];
             double humidity = Double.parseDouble(results[3]);
             double tempFahrenheit = Double.parseDouble(results[4]);
-
+            int moisture = Integer.parseInt(results[5]);
             
         	tweetSelection.tweetSelect datSelection = new tweetSelection.tweetSelect();
-        	String usedString = datSelection.selectATweet(usedList, lightAmount, soundAmount, direction, humidity, tempFahrenheit);
-        	
+
+        	String usedString = datSelection.selectATweet(usedList, lightAmount, soundAmount, direction, humidity, tempFahrenheit, moisture);
+        	System.out.println("LightAmount: " + lightAmount);
+        	end_result = "";
         	
         	
         	System.out.println(usedString);
