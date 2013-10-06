@@ -40,7 +40,7 @@ public class tweetSelect {
 		boolean isTiltGood = false;//can only be false
 		boolean isLightGood = false;
 		boolean isSoundGood = true;
-		boolean isMiscGood = false;
+		//boolean isMiscGood = false;
 		int moistureGoodEnum = 0;//0 = bad, 1 = neutral, 2 = good
 		int temperatureGoodEnum = 0;//0 = bad, 1 = neutral, 2 = good
 
@@ -312,12 +312,12 @@ public class tweetSelect {
 		else if (!isSoundGood){
 			masterList.addAll(soundBad);
 		}		
-		if(isMiscGood){
+//		if(isMiscGood){
 			masterList.addAll(miscGood);
-		}
-		else if (!isMiscGood){
+//		}
+//		else if (!isMiscGood){
 			masterList.addAll(miscBad);
-		}		
+//		}		
 		if(moistureGoodEnum == 0){
 			masterList.addAll(moistureBad);
 		}
